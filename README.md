@@ -1,56 +1,116 @@
-# Welcome to your Expo app 👋
+# React Native / Expo Boilerplate
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A production-ready React Native/Expo boilerplate for bootstrapping mobile applications. Pre-configured with file-based navigation, light/dark Restyle theming, swipeable tab transitions, strict quality tooling, and environment-aware configuration.
 
-## Get started
+---
 
-1. Install dependencies
+## 📸 Screenshots
 
-   ```bash
-   npm install
-   ```
+|                              Light Mode                              |                             Dark Mode                              |                   Swipeable Tabs / Deep Linking                    |
+| :------------------------------------------------------------------: | :----------------------------------------------------------------: | :----------------------------------------------------------------: |
+| ![Light Mode Screenshot](./assets/images/placeholder-light-mode.png) | ![Dark Mode Screenshot](./assets/images/placeholder-dark-mode.png) | ![Swipeable Tabs Screenshot](./assets/images/placeholder-tabs.png) |
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🚀 Key Stack & Dependency Versions
 
-In the output, you'll find options to open the app in a
+| Category                  | Choice                                     | Exact Version                                                                   |
+| ------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
+| **Framework**             | Expo SDK                                   | `~57.0.10`                                                                      |
+| **React / React Native**  | React & React Native                       | `19.2.3` / `0.86.2`                                                             |
+| **Language**              | TypeScript                                 | `~6.0.3` (Strict Mode)                                                          |
+| **Navigation**            | Expo Router                                | `~57.0.10`                                                                      |
+| **Tab Navigation**        | Material Top Tabs + Pager View             | `@react-navigation/material-top-tabs ^7.6.14` + `react-native-pager-view 8.0.2` |
+| **Theming**               | Restyle                                    | `@shopify/restyle ^2.4.5`                                                       |
+| **Client State**          | Zustand                                    | `^5.0.14`                                                                       |
+| **Server State**          | TanStack Query                             | `^5.101.4`                                                                      |
+| **Key-Value Storage**     | MMKV + Async Storage                       | `react-native-mmkv ^4.3.2` + `@react-native-async-storage/async-storage 3.1.1`  |
+| **Secure Storage**        | Expo Secure Store                          | `~57.0.1`                                                                       |
+| **Forms & Validation**    | React Hook Form + Zod                      | `react-hook-form ^7.84.0` + `zod ^4.4.3`                                        |
+| **Animations & Gestures** | Reanimated + Gesture Handler               | `react-native-reanimated 4.5.1` + `react-native-gesture-handler ~2.32.0`        |
+| **Linting & Quality**     | ESLint v9 + Prettier + Husky + lint-staged | `eslint ^9.39.5` + `prettier ^3.9.6` + `husky ^9.1.7`                           |
+| **Error Tracking**        | Sentry                                     | `@sentry/react-native ^8.22.0`                                                  |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📂 Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+my-app/
+├── .husky/              # Git hooks (pre-commit type check & lint-staged)
+├── assets/              # App icons, splash screen, and images
+├── src/
+│   ├── app/             # Expo Router file-based routing & auth protection
+│   │   ├── _layout.tsx  # Root Layout (Auth gate + AppThemeProvider)
+│   │   ├── (app)/       # Authenticated routes group with swipeable top tabs
+│   │   │   ├── _layout.tsx
+│   │   │   ├── index.tsx
+│   │   │   └── profile/[id].tsx
+│   │   └── (auth)/      # Unauthenticated auth routes group
+│   │       └── sign-in.tsx
+│   ├── components/      # Restyle primitives & UI components (Box, Text, Card, Button, Screen)
+│   ├── context/         # AuthContext and ThemeContext (Light/Dark + AsyncStorage)
+│   ├── hooks/           # Custom hooks
+│   ├── store/           # Zustand state stores
+│   └── theme/           # Restyle theme design tokens & variants (lightTheme & darkTheme)
+├── app.config.ts        # Dynamic Expo config supporting environment switching (dev/staging/prod)
+├── eas.json             # EAS build profiles (development, preview, production)
+├── eslint.config.mjs    # ESLint v9 Flat Configuration
+├── .npmrc               # Lock exact dependency versions (save-exact=true)
+├── .nvmrc               # Node runtime version lock (20.18.0)
+└── tsconfig.json        # Strict TypeScript configuration
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-### Other setup steps
+## ⚡ Getting Started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+# Clone the repository
+git clone git@github.com:samriddha-gautam/React-Native-Expo-Boilerplate.git
+cd React-Native-Expo-Boilerplate/my-app
 
-## Learn more
+# Install exact dependencies
+npm ci
 
-To learn more about developing your project with Expo, look at the following resources:
+# Start the Expo development server
+npm run start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🛠 Available Scripts
 
-Join our community of developers creating universal apps.
+- `npm run start` - Launch Expo development server.
+- `npm run format` - Format codebase using Prettier.
+- `npm run type-check` - Perform strict TypeScript type checks (`tsc --noEmit`).
+- `npm run lint` - Run ESLint v9 checks.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## 📋 Boilerplate Setup Checklist for New Projects
+
+Before submitting a new app to app stores, update placeholders in:
+
+- [ ] `app.config.ts` → `name`, `slug`
+- [ ] `app.config.ts` → `ios.bundleIdentifier`
+- [ ] `app.config.ts` → `android.package`
+- [ ] `app.config.ts` → custom URL `scheme` (for deep linking)
+- [ ] `eas.json` → confirm build profiles
+- [ ] `assets/` → App icons, splash screen, and images
+
+> ⚠️ **Important:** Rename `bundleIdentifier` and `android.package` **before** your first store submission.
+
+---
+
+## 🔗 Deep Linking
+
+Custom scheme deep links are routed through Expo Router:
+
+```bash
+# Test iOS Deep Link:
+npx uri-scheme open myapp://profile/123 --ios
+
+# Test Android Deep Link:
+npx uri-scheme open myapp://profile/123 --android
+```

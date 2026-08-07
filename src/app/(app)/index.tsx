@@ -1,47 +1,50 @@
-import { View, Text, Button, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../context/AuthContext";
+import { Screen } from "../../components/Screen";
+import { Box, Text } from "../../components/primitives";
+import { Card } from "../../components/Card";
+import { Button } from "../../components/Button";
+import { useAppTheme } from "../../context/ThemeContext";
 
 export default function HomeScreen() {
   const router = useRouter();
   const { signOut } = useAuth();
+  const { mode, toggleTheme } = useAppTheme();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home Screen (Swipeable Tab 1)</Text>
-      <Text style={styles.text}>Swipe left to view Profile tab!</Text>
+    <Screen>
+      <Box flex={1} padding="m" justifyContent="center">
+        <Card variant="elevated" marginBottom="l">
+          <Text variant="header" marginBottom="xs">
+            Restyle Theming
+          </Text>
+          <Text variant="subheader" marginBottom="s">
+            Current Theme Mode: {mode.toUpperCase()}
+          </Text>
+          <Text variant="body" color="textSecondary" marginBottom="m">
+            This card demonstrates Restyle design tokens, Box, Text, and Card primitives.
+          </Text>
 
-      <View style={styles.spacing} />
+          <Button
+            label={`Switch to ${mode === "light" ? "Dark" : "Light"} Mode`}
+            onPress={toggleTheme}
+            variant="secondary"
+          />
+        </Card>
 
-      <Button
-        title="Test Deep Link / Navigation to Profile #123"
-        onPress={() => router.push("/profile/123")}
-      />
+        <Card variant="outlined" marginBottom="l">
+          <Text variant="subheader" marginBottom="s">
+            Navigation Test
+          </Text>
+          <Button
+            label="Open Profile #123"
+            onPress={() => router.push("/profile/123")}
+            variant="primary"
+          />
+        </Card>
 
-      <View style={styles.spacing} />
-
-      <Button title="Sign Out" color="#d9534f" onPress={signOut} />
-    </View>
+        <Button label="Sign Out" onPress={signOut} variant="danger" />
+      </Box>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  text: {
-    fontSize: 14,
-    color: "#555",
-  },
-  spacing: {
-    marginVertical: 10,
-  },
-});

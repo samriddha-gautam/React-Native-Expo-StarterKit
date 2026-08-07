@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Slot, useRouter, useSegments } from "expo-router";
 import { AuthProvider, useAuth } from "../context/AuthContext";
+import { AppThemeProvider } from "../context/ThemeContext";
 
 function RootLayoutNav() {
   const { isAuthenticated } = useAuth();
@@ -11,10 +12,8 @@ function RootLayoutNav() {
     const inAuthGroup = segments[0] === "(auth)";
 
     if (!isAuthenticated && !inAuthGroup) {
-      // Redirect unauthenticated users to the sign-in screen inside (auth)
       router.replace("/(auth)/sign-in");
     } else if (isAuthenticated && inAuthGroup) {
-      // Redirect authenticated users away from auth screens to main app
       router.replace("/(app)");
     }
   }, [isAuthenticated, segments]);
@@ -24,8 +23,10 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   return (
-    <AuthProvider>
-      <RootLayoutNav />
-    </AuthProvider>
+    <AppThemeProvider>
+      <AuthProvider>
+        <RootLayoutNav />
+      </AuthProvider>
+    </AppThemeProvider>
   );
 }

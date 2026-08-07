@@ -1,33 +1,25 @@
-import { View, Text, Button, StyleSheet } from "react-native";
 import { useAuth } from "../../context/AuthContext";
+import { Screen } from "../../components/Screen";
+import { Box, Text } from "../../components/primitives";
+import { Card } from "../../components/Card";
+import { Button } from "../../components/Button";
 
 export default function SignInScreen() {
   const { signIn } = useAuth();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign In Screen</Text>
-      <Text style={styles.subtitle}>Auth-Gated Route Demo</Text>
-      <Button title="Sign In" onPress={signIn} />
-    </View>
+    <Screen>
+      <Box flex={1} padding="m" justifyContent="center">
+        <Card variant="elevated">
+          <Text variant="header" marginBottom="xs">
+            Sign In Screen
+          </Text>
+          <Text variant="body" color="textSecondary" marginBottom="l">
+            Auth-Gated Route Demo
+          </Text>
+          <Button label="Sign In" onPress={signIn} variant="primary" />
+        </Card>
+      </Box>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: "#666",
-    marginBottom: 20,
-  },
-});
