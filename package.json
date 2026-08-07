@@ -4,14 +4,21 @@
   "version": "1.0.0",
   "dependencies": {
     "@expo/ui": "~57.0.9",
+    "@hookform/resolvers": "^5.7.1",
+    "@react-navigation/material-top-tabs": "^7.6.14",
+    "@sentry/react-native": "^8.22.0",
+    "@shopify/restyle": "^2.4.5",
+    "@tanstack/react-query": "^5.101.4",
     "expo": "~57.0.10",
     "expo-constants": "~57.0.9",
+    "expo-dev-client": "~57.0.10",
     "expo-device": "~57.0.1",
     "expo-font": "~57.0.1",
     "expo-glass-effect": "~57.0.1",
     "expo-image": "~57.0.2",
     "expo-linking": "~57.0.5",
     "expo-router": "~57.0.10",
+    "expo-secure-store": "~57.0.1",
     "expo-splash-screen": "~57.0.5",
     "expo-status-bar": "~57.0.1",
     "expo-symbols": "~57.0.1",
@@ -19,16 +26,29 @@
     "expo-web-browser": "~57.0.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-hook-form": "^7.84.0",
     "react-native": "0.86.2",
     "react-native-gesture-handler": "~2.32.0",
+    "react-native-mmkv": "^4.3.2",
+    "react-native-pager-view": "8.0.2",
     "react-native-reanimated": "4.5.1",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
     "react-native-web": "~0.21.0",
-    "react-native-worklets": "0.10.1"
+    "react-native-worklets": "0.10.1",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.6",
     "@types/react": "~19.2.2",
+    "eslint": "^9.39.5",
+    "eslint-config-expo": "^57.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -37,7 +57,19 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   },
   "private": true
 }
