@@ -4,7 +4,7 @@ A production-ready React Native/Expo boilerplate for bootstrapping mobile applic
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 |                              Light Mode                              |                             Dark Mode                              |                   Swipeable Tabs / Deep Linking                    |
 | :------------------------------------------------------------------: | :----------------------------------------------------------------: | :----------------------------------------------------------------: |
@@ -12,7 +12,7 @@ A production-ready React Native/Expo boilerplate for bootstrapping mobile applic
 
 ---
 
-## 🚀 Key Stack & Dependency Versions
+## Key Stack & Dependency Versions
 
 | Category                  | Choice                                     | Exact Version                                                                   |
 | ------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ A production-ready React Native/Expo boilerplate for bootstrapping mobile applic
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 my-app/
@@ -63,7 +63,7 @@ my-app/
 
 ---
 
-## ⚡ Getting Started
+## Getting Started
 
 ```bash
 # Clone the repository
@@ -79,7 +79,7 @@ npm run start
 
 ---
 
-## 🛠 Available Scripts
+## Available Scripts
 
 - `npm run start` - Launch Expo development server.
 - `npm run format` - Format codebase using Prettier.
@@ -88,7 +88,7 @@ npm run start
 
 ---
 
-## 📋 Boilerplate Setup Checklist for New Projects
+## Boilerplate Setup Checklist for New Projects
 
 Before submitting a new app to app stores, update placeholders in:
 
@@ -103,7 +103,7 @@ Before submitting a new app to app stores, update placeholders in:
 
 ---
 
-## 🔗 Deep Linking
+## Deep Linking
 
 Custom scheme deep links are routed through Expo Router:
 
