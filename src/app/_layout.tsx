@@ -1,12 +1,18 @@
 import { useEffect } from "react";
 import { Slot, useRouter, useSegments } from "expo-router";
-import { AuthProvider, useAuth } from "../context/AuthContext";
-import { AppThemeProvider } from "../context/ThemeContext";
+import { AppProviders } from "../providers/AppProviders";
+import { useAuthStore } from "../store/authStore";
 
 function RootLayoutNav() {
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const hydrate = useAuthStore((s) => s.hydrate);
   const segments = useSegments();
   const router = useRouter();
+
+  // Restore session from SecureStore on first mount
+  useEffect(() => {
+    hydrate();
+  }, [hydrate]);
 
   useEffect(() => {
     const inAuthGroup = segments[0] === "(auth)";
@@ -23,10 +29,8 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   return (
-    <AppThemeProvider>
-      <AuthProvider>
-        <RootLayoutNav />
-      </AuthProvider>
-    </AppThemeProvider>
+    <AppProviders>
+      <RootLayoutNav />
+    </AppProviders>
   );
 }

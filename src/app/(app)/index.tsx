@@ -1,15 +1,16 @@
 import { useRouter } from "expo-router";
-import { useAuth } from "../../context/AuthContext";
+import { useAuthStore } from "../../store/authStore";
+import { useThemeStore } from "../../store/themeStore";
 import { Screen } from "../../components/Screen";
 import { Box, Text } from "../../components/primitives";
 import { Card } from "../../components/Card";
 import { Button } from "../../components/Button";
-import { useAppTheme } from "../../context/ThemeContext";
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { signOut } = useAuth();
-  const { mode, toggleTheme } = useAppTheme();
+  const signOut = useAuthStore((s) => s.signOut);
+  const mode = useThemeStore((s) => s.mode);
+  const toggleTheme = useThemeStore((s) => s.toggleTheme);
 
   return (
     <Screen>
@@ -22,7 +23,8 @@ export default function HomeScreen() {
             Current Theme Mode: {mode.toUpperCase()}
           </Text>
           <Text variant="body" color="textSecondary" marginBottom="m">
-            This card demonstrates Restyle design tokens, Box, Text, and Card primitives.
+            This card demonstrates Restyle design tokens, Box, Text, and Card primitives driven by
+            Zustand.
           </Text>
 
           <Button
